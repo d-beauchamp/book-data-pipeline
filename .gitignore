@@ -1,0 +1,30 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directory
+.venv/
+venv/
+env/
+ENV/
+
+# Ignore PyCharm project files
+.idea/
+
+# Ignore JSON files
+*.json
+!config.json
+
+# Ignore log files
+*.log
+
+# Ignore compressed files
+*.gz
+*.zip
+*.tar
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+*.DS_Store
