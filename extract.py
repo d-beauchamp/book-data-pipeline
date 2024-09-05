@@ -1,17 +1,13 @@
 import requests
 import json
+import os
 
 # Todo: add case where files are deleted if they already exist
+# Todo: fix main function
 
-def download_file(url, local_filename):
-    with requests.get(url, stream=True) as response:
-        response.raise_for_status()  # check for errors
-        with open(local_filename, "wb") as file:
-            for chunk in response.iter_content(chunk_size=64*1024):
-                file.write(chunk)
-                print("Chunk processed")
-    return local_filename
-
+def download_kaggle_dataset(dataset_dir, dataset_identifier):
+    os.makedirs(dataset_dir, exist_ok=True)
+    os.system(f"kaggle datasets download -d {dataset_identifier} -p {dataset_dir} --unzip")
 
 # Extract book data from Gutendex API using a given query, storing in JSON file
 def extract_book_data(url, filename="guten_books.json"):
@@ -60,14 +56,29 @@ def extract_book_data(url, filename="guten_books.json"):
 
 
 if __name__ == "__main__":
-    url = "https://openlibrary.org/data/ol_dump_works_latest.txt.gz"
+    '''url = "https://openlibrary.org/data/ol_dump_works_latest.txt.gz"
     local_file = "ol_dump_works_latest.txt.gz"
     open_lib_dump = download_file(url, local_file)
-    print(f"Downloaded {local_file}")
+    print(f"Downloaded {local_file}")'''
 
-    query = "https://gutendex.com/books"
+    new_dir = "kaggle_datasets"
+    dataset_id = "austinreese/goodreads-books"
+    download_kaggle_dataset(new_dir, dataset_id)
+    print("Downloaded dataset")
+
+    '''query = "https://gutendex.com/books"
     gutendata = extract_book_data(query)
-    print(f"Total books fetched: {len(gutendata)}")
+    print(f"Total books fetched: {len(gutendata)}")'''
+
+
+'''def download_file(url, local_filename):
+    with requests.get(url, stream=True) as response:
+        response.raise_for_status()  # check for errors
+        with open(local_filename, "wb") as file:
+            for chunk in response.iter_content(chunk_size=64*1024):
+                file.write(chunk)
+                print("Chunk processed")
+    return local_filename'''
 
 '''# Extract book data from OpenLibrary API using a given query, storing in JSON file
 def extract_lib_data(query, limit, filename="open_lib_books.json"):
