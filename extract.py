@@ -4,6 +4,7 @@ import os
 
 # Todo: add case where files are deleted if they already exist
 # Todo: fix main function
+# Todo: check for style
 
 def download_kaggle_dataset(dataset_dir, dataset_identifier):
     os.makedirs(dataset_dir, exist_ok=True)

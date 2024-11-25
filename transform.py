@@ -2,6 +2,10 @@ import pandas as pd
 import re
 
 # Todo: see how to fix encoding in order to avoid strange characters in title/description
+# Todo: Try to break down columns that are lists
+# Todo: drop duplicates for id and title columns in BOTH tables (also dropna id)
+# Todo: Check if import re is needed
+# Todo: rename id columns to goodreads_id and gutendex_id for clarity
 
 def split_values(col_vals):
     if isinstance(col_vals, str):
@@ -13,7 +17,6 @@ def split_values(col_vals):
 
 def clean_goodreads_data(df):
     return (df
-            .set_index("id")
             # See if there's a way to .apply to multiple columns at once
             .assign(date_published=df["date_published"].str.extract(r'(\d{4})', expand=False),
                     author=df["author"].apply(split_values),
@@ -39,7 +42,6 @@ def clean_gutendex_data(df):
             .drop(columns='formats')
             .assign(authors=df["authors"].apply(rearrange_author_names))
             .drop_duplicates(subset="id")
-            .set_index("id")
             .dropna(subset=["title"])
             .convert_dtypes()
             )
