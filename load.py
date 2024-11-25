@@ -11,8 +11,8 @@ cleaned_goodreads_df, cleaned_gutendex_df = main()
 con = duckdb.connect("book_data.ddb")
 
 # Drop tables if they already exist (to refresh with new data) -- can delete once done testing
-con.execute("DROP TABLE IF EXISTS goodreads")
-con.execute("DROP TABLE IF EXISTS gutenberg")
+# con.execute("DROP TABLE IF EXISTS goodreads")
+# con.execute("DROP TABLE IF EXISTS gutenberg")
 
 # Create tables from the dataframes
 con.execute("CREATE TABLE IF NOT EXISTS goodreads AS SELECT * FROM cleaned_goodreads_df")
