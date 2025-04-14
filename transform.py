@@ -1,11 +1,8 @@
 import pandas as pd
-import re
 
-# Todo: see how to fix encoding in order to avoid strange characters in title/description
-# Todo: Try to break down columns that are lists
-# Todo: drop duplicates for id and title columns in BOTH tables (also dropna id)
-# Todo: Check if import re is needed
-# Todo: rename id columns to goodreads_id and gutendex_id for clarity
+# TODO: Handle encoding issues to clean strange characters in title/description
+# TODO: Drop duplicates and nulls for 'id' and 'title' columns in both tables
+# TODO: Rename 'id' columns to 'goodreads_id' and 'gutendex_id' for clarity
 
 def split_values(col_vals):
     if isinstance(col_vals, str):
@@ -17,7 +14,6 @@ def split_values(col_vals):
 
 def clean_goodreads_data(df):
     return (df
-            # See if there's a way to .apply to multiple columns at once
             .assign(date_published=df["date_published"].str.extract(r'(\d{4})', expand=False),
                     author=df["author"].apply(split_values),
                     books_in_series=df["books_in_series"].apply(split_values),
@@ -46,6 +42,7 @@ def clean_gutendex_data(df):
             .convert_dtypes()
             )
 
+
 def main():
     pd.set_option("display.max_columns", None)
 
@@ -60,6 +57,7 @@ def main():
     cleaned_gutendex_df = clean_gutendex_data(gutendex_df)
 
     return cleaned_goodreads_df, cleaned_gutendex_df
+
 
 if __name__ == "__main__":
     main()
