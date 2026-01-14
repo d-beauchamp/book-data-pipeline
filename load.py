@@ -19,3 +19,5 @@ df2 = con.sql("SELECT * FROM gutenberg").df()
 
 print(df.head())
 print(df2.head())
+
+con.close()

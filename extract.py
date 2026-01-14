@@ -2,11 +2,14 @@ import requests
 import json
 import os
 
-# Todo: Implement check where files are deleted if they already exist
+# TODO: Implement check where files are deleted if they already exist
+# TODO: requirements.txt -- look into pyproject.toml
+
 
 def download_kaggle_dataset(dataset_dir, dataset_identifier):
     os.makedirs(dataset_dir, exist_ok=True)
     os.system(f"kaggle datasets download -d {dataset_identifier} -p {dataset_dir} --unzip")
+
 
 # Extract book data from Gutendex API using a given query, storing in JSON file
 def extract_book_data(url, filename="guten_books.json"):
@@ -54,12 +57,16 @@ def extract_book_data(url, filename="guten_books.json"):
     return book_data
 
 
-if __name__ == "__main__":
-    new_dir = "kaggle_datasets"
+def main():
+    new_dir = "data"
     dataset_id = "austinreese/goodreads-books"
     download_kaggle_dataset(new_dir, dataset_id)
-    print("Downloaded dataset")
+    print("Downloaded Kaggle Goodreads dataset")
 
     query = "https://gutendex.com/books"
     gutendata = extract_book_data(query)
     print(f"Total books fetched: {len(gutendata)}")
+
+
+if __name__ == "__main__":
+    main()

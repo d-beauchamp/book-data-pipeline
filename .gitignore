@@ -31,6 +31,11 @@ ENV/
 
 # Ignore Open Library GZ file (ended up unused)
 ol_dump_works_latest.txt.gz
-# Ignore kaggle_datasets directory and database file (avoid large data files)
-kaggle_datasets/
+
+secrets.toml
+
+# Ignore data directory and database file (avoid large data files)
+data/
 *.ddb
+
+.streamlit/
