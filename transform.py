@@ -79,13 +79,9 @@ def create_link_df(books, authors):
     """Create a dataframe linking book IDs to author IDs for each data source."""
     links = []
 
-    print(authors.author_id.head())
-    print(authors.name.head())
-
-    print(authors.author_id.index.equals(authors.name.index))
-
     # Lookup dict for faster processing (instead of using .loc)
     authors_lookup = dict(zip(authors["name"], authors["author_id"]))
+
     for book in books.itertuples():
         for author in book.authors:
             author_id = authors_lookup[author]
@@ -97,7 +93,8 @@ def create_link_df(books, authors):
 def clean_gutendex_data(df):
     return (df
             .drop(columns=["formats", "translators", "media_type", "bookshelves"])
-            .assign(authors=df["authors"].apply(normalize_authors))
+            .assign(authors=df["authors"].apply(normalize_authors),
+                    subjects=df["subjects"].apply(lambda x: x if x else pd.NA))
             .drop_duplicates(subset="id")
             .dropna(subset=["title"])
             .convert_dtypes()
@@ -128,7 +125,8 @@ def main():
     goodreads_table = cleaned_goodreads_df.drop(columns=["authors"])
     gutenberg_table = cleaned_gutendex_df.drop(columns=["authors"])
 
-    print(gutenberg_book_author_link)
+    print(gutenberg_table)
+    print(gutenberg_table.dtypes)
 
     return (goodreads_table, gutenberg_table,
             authors, goodreads_book_author_link, gutenberg_book_author_link)
