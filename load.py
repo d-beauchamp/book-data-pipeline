@@ -1,7 +1,7 @@
 import duckdb
 from transform import main
 
-# TODO: implement foreign key for more traditional structure (create author_id or use title)
+# TODO: implement foreign and primary keys
 
 # Import cleaned dataframes from transform file
 cleaned_goodreads_df, cleaned_gutendex_df = main()

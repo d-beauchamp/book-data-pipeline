@@ -1,4 +1,6 @@
 import pandas as pd
+from validate import validate_dfs
+
 
 # TODO: Handle encoding issues to clean strange characters in title/description
 
@@ -119,17 +121,23 @@ def main():
     goodreads_book_author_view = cleaned_goodreads_df[["id", "authors"]]
     gutenberg_book_author_view = book_author_names_view(cleaned_gutendex_df)
 
-    goodreads_book_author_link = create_link_df(goodreads_book_author_view, authors)
-    gutenberg_book_author_link = create_link_df(gutenberg_book_author_view, authors)
+    goodreads_links = create_link_df(goodreads_book_author_view, authors)
+    gutenberg_links = create_link_df(gutenberg_book_author_view, authors)
 
     goodreads_table = cleaned_goodreads_df.drop(columns=["authors"])
     gutenberg_table = cleaned_gutendex_df.drop(columns=["authors"])
 
-    print(gutenberg_table)
-    print(gutenberg_table.dtypes)
+    dfs = {
+        "goodreads": goodreads_table,
+        "gutenberg": gutenberg_table,
+        "authors": authors,
+        "goodreads_links": goodreads_links,
+        "gutenberg_links": gutenberg_links
+    }
 
-    return (goodreads_table, gutenberg_table,
-            authors, goodreads_book_author_link, gutenberg_book_author_link)
+    validated_dfs = validate_dfs(dfs)
+
+    return validated_dfs
 
 
 if __name__ == "__main__":
