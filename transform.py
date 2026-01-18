@@ -1,7 +1,6 @@
 import pandas as pd
 from validate import validate_dfs
 
-
 # TODO: Handle encoding issues to clean strange characters in title/description
 
 
@@ -103,7 +102,7 @@ def clean_gutendex_data(df):
             )
 
 
-def main():
+def transform_dfs():
     pd.set_option("display.max_columns", None)
 
     goodreads_cols = ["id", "title", "author", "rating_count", "review_count",
@@ -141,4 +140,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    transform_dfs()

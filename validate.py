@@ -95,7 +95,8 @@ def validate_dfs(dfs: dict[str, DataFrame]):
         try:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore", category=pa.errors.SchemaWarning)
-                validated_dfs.append(SCHEMAS[name].validate(df, lazy=True))
+                valid_df = SCHEMAS[name].validate(df, lazy=True)
+                validated_dfs.append(valid_df)
         except pa.errors.SchemaError as exc:
             print("Schema errors and failure cases:")
             print(exc.failure_cases)
