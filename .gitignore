@@ -32,7 +32,7 @@ ENV/
 # Ignore Open Library GZ file (ended up unused)
 ol_dump_works_latest.txt.gz
 
-secrets.toml
+*.secrets.toml
 
 # Ignore data directory and database file (avoid large data files)
 data/

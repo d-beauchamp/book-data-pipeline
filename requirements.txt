@@ -1,5 +1,7 @@
 duckdb
+duckdb-engine
 streamlit
 pandas
 requests==2.32.4
 pandera[pandas]
+SQLAlchemy

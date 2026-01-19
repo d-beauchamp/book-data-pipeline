@@ -2,6 +2,9 @@ import pandas as pd
 from validate import validate_dfs
 
 # TODO: Handle encoding issues to clean strange characters in title/description
+# TODO: authors that appear in both sources marked as being in only one and missing birth/death years
+# e.g. shakespeare, steinbeck
+# Add Gutenberg first, then goodreads?
 
 
 def split_values(col_vals):
