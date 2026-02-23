@@ -7,6 +7,9 @@
 This project builds an ETL pipeline integrating Goodreads and Project Gutenberg data into a relational DuckDB database, 
 with by a Streamlit dashboard for analytics and visualization.
 
+For ease of viewing, I've deployed the dashboard via Streamlit Cloud; it can be found
+here: <https://book-data-pipeline.streamlit.app>.
+
 ### Tech Stack
 
 * Python 

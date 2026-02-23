@@ -34,8 +34,6 @@ ol_dump_works_latest.txt.gz
 
 *.secrets.toml
 
-# Ignore data directory and database file (avoid large data files)
-data/
-*.ddb
-
-.streamlit/
+# Ignore data directory except for database file
+data/*
+!data/book_data.ddb

@@ -1,7 +1,8 @@
 import streamlit as st
+import duckdb
 import matplotlib.pyplot as plt
 
-conn = st.connection("book_data_db", type="sql")
+conn = duckdb.connect("data/book_data.ddb")
 
 st.set_page_config(
     page_title="Book Data Dashboard",
@@ -35,7 +36,7 @@ most_popular_books = conn.query(f"""SELECT
                                         ON gutenberg.id = gutenberg_links.book_id
                                     INNER JOIN authors
                                         ON gutenberg_links.author_id = authors.author_id
-                                    LIMIT 10;""")
+                                    LIMIT 10;""").df()
 
 most_popular_books.index += 1
 
@@ -50,7 +51,7 @@ languages = conn.query("""SELECT
                           FROM gutenberg
                           CROSS JOIN UNNEST(languages) as t(lang)
                           GROUP BY lang
-                          ORDER BY book_count DESC""")
+                          ORDER BY book_count DESC""").df()
 st.dataframe(languages)
 
 st.header("Longest-Lived Authors")
@@ -63,14 +64,14 @@ author_age = conn.query("""SELECT
                             (death_year - birth_year) AS age
                            FROM authors
                            ORDER BY age DESC
-                           LIMIT 25;""")
+                           LIMIT 25;""").df()
 st.dataframe(author_age)
 
 # Graph book ratings in Goodreads compared to publication year (scatter)
 
 st.header("Book Ratings Distribution Across Time (Goodreads)")
 
-ratings = conn.query("SELECT year_published, average_rating FROM goodreads")
+ratings = conn.query("SELECT year_published, average_rating FROM goodreads").df()
 
 plt.style.use("dark_background")
 fig, ax = plt.subplots()
