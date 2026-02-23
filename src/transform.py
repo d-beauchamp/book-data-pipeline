@@ -1,11 +1,6 @@
 import pandas as pd
 from validate import validate_dfs
 
-# TODO: Handle encoding issues to clean strange characters in title/description
-# TODO: authors that appear in both sources marked as being in only one and missing birth/death years
-# e.g. shakespeare, steinbeck
-# Add Gutenberg first, then goodreads?
-
 
 def split_values(col_vals):
     if isinstance(col_vals, str):
@@ -111,8 +106,8 @@ def transform_dfs():
     goodreads_cols = ["id", "title", "author", "rating_count", "review_count",
                       "average_rating", "number_of_pages", "date_published", "publisher",
                       "settings", "awards", "description"]
-    goodreads_df = pd.read_csv("data/goodreads_books.csv", usecols=goodreads_cols)
-    gutendex_df = pd.read_json("data/guten_books.json")
+    goodreads_df = pd.read_csv("../data/goodreads_books.csv", usecols=goodreads_cols)
+    gutendex_df = pd.read_json("../data/guten_books.json")
 
     cleaned_goodreads_df = clean_goodreads_data(goodreads_df)
     cleaned_gutendex_df = clean_gutendex_data(gutendex_df)

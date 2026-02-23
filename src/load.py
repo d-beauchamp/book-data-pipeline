@@ -1,11 +1,11 @@
 import duckdb
-from transform import transform_dfs
+from src.transform import transform_dfs
 
 # Import cleaned dataframes from transform file
 goodreads_df, gutenberg_df, authors_df, goodreads_link_df, gutenberg_link_df = transform_dfs()
 
 # Database connection
-con = duckdb.connect("book_data.ddb")
+con = duckdb.connect("../data/book_data.ddb")
 
 # Create book and author tables directly from the dataframes
 con.execute("CREATE TABLE IF NOT EXISTS goodreads AS SELECT * FROM goodreads_df")

@@ -3,8 +3,6 @@ import json
 import os
 
 # TODO: Implement check where files are deleted if they already exist
-# TODO: requirements.txt -- look into pyproject.toml
-
 
 def download_kaggle_dataset(dataset_dir, dataset_identifier):
     os.makedirs(dataset_dir, exist_ok=True)
@@ -58,7 +56,7 @@ def extract_book_data(url, filename="guten_books.json"):
 
 
 def main():
-    new_dir = "data"
+    new_dir = "../data"
     dataset_id = "austinreese/goodreads-books"
     download_kaggle_dataset(new_dir, dataset_id)
     print("Downloaded Kaggle Goodreads dataset")
