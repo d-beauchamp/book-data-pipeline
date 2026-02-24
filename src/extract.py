@@ -4,13 +4,14 @@ import os
 
 # TODO: Implement check where files are deleted if they already exist
 
+
 def download_kaggle_dataset(dataset_dir, dataset_identifier):
     os.makedirs(dataset_dir, exist_ok=True)
     os.system(f"kaggle datasets download -d {dataset_identifier} -p {dataset_dir} --unzip")
 
 
 # Extract book data from Gutendex API using a given query, storing in JSON file
-def extract_book_data(url, filename="guten_books.json"):
+def extract_book_data(url, filename="../data/guten_books.json"):
     book_data = []  # dictionary to accumulate data
     page = 1
 
@@ -20,7 +21,6 @@ def extract_book_data(url, filename="guten_books.json"):
         with open(filename, "r") as file:
             book_data = json.load(file)
 
-    # maybe break this into separate function
     while True:
         params = {
             "page": page

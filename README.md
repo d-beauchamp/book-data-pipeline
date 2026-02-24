@@ -37,7 +37,6 @@ Due to file size limits, the data files are not included in the repository.
 To run locally:
 ```bash
 pip install -r requirements.txt
-rm data/book_data.ddb
 python src/extract.py
 python src/load.py
 streamlit run app/app.py
