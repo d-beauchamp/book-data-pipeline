@@ -36,4 +36,3 @@ ol_dump_works_latest.txt.gz
 
 # Ignore data directory except for database file
 data/*
-!data/book_data.ddb

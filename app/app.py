@@ -82,3 +82,5 @@ ax.set_xlabel("Year")
 ax.set_ylabel("Rating")
 
 st.pyplot(fig)
+
+conn.close()
